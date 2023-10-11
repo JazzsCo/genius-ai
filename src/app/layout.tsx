@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   icons: {
     icon: ["/favicon-dev.png"],
   },
-  description: "Created this platform by Jazz-C",
+  description: "Created AI platform by Jazz-C",
 };
 
 export default function RootLayout({
