@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,10 +14,14 @@ export default function Home() {
 
       <div className="flex gap-4">
         <Link href={"/sign-in"}>
-          <Button>Sign In</Button>
+          <Button className="rounded-xl" size={"lg"}>
+            Sign In
+          </Button>
         </Link>
         <Link href={"/sign-up"}>
-          <Button>Register</Button>
+          <Button className="rounded-xl" size={"lg"}>
+            Register
+          </Button>
         </Link>
       </div>
     </main>
