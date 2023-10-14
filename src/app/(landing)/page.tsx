@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { ThemeButton } from "@/components/theme-button";
+import ThemeButton from "@/components/theme-button";
 
 export default function Home() {
   return (

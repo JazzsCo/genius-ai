@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function ThemeButton() {
+const ThemeButton = () => {
   const { setTheme } = useTheme();
 
   return (
@@ -50,4 +50,6 @@ export function ThemeButton() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default ThemeButton;
