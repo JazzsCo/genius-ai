@@ -2,8 +2,8 @@ import React from "react";
 import { UserButton } from "@clerk/nextjs";
 
 import SideBar from "@/components/sidebar";
-import { ThemeButton } from "@/components/mode-toggle";
 import MobileSideBar from "@/components/mobile-sidebar";
+import { ThemeButton } from "@/components/theme-button";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +12,9 @@ export default function layout({ children }: { children: React.ReactNode }) {
         <SideBar />
       </div>
       <div className="flex md:pl-64 lg:pl-72 mt-5">
-        <MobileSideBar />
+        <div className="flex md:hidden">
+          <MobileSideBar />
+        </div>
         <ThemeButton />
         <UserButton afterSignOutUrl="/" />
       </div>
