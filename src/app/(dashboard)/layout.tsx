@@ -11,16 +11,19 @@ export default function layout({ children }: { children: React.ReactNode }) {
       <div className="hidden md:w-64 lg:w-72 md:flex md:fixed md:inset-y-0 border-r border-zinc-300 dark:border-zinc-800">
         <SideBar />
       </div>
-      <div className="md:pl-64 lg:pl-72">
-        <nav className="flex items-center p-3">
+
+      <div className="w-full md:pl-64 lg:pl-72">
+        <nav className="flex items-center justify-between md:justify-end px-5 pt-3">
           <div className="flex md:hidden">
             <MobileSideBar />
           </div>
-          <ThemeButton />
-          <UserButton afterSignOutUrl="/" />
+          <div className="flex items-center space-x-3">
+            <ThemeButton />
+            <UserButton afterSignOutUrl="/" />
+          </div>
         </nav>
 
-        <main>{children}</main>
+        <main className="mx-3">{children}</main>
       </div>
     </div>
   );
