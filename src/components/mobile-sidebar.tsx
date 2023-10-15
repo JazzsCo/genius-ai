@@ -13,7 +13,7 @@ const MobileSideBar = () => {
         <Button
           variant="outline"
           size="icon"
-          className="rounded-xl outline-none text-gray-600 dark:text-gray-300"
+          className="rounded-xl text-gray-600 dark:text-gray-300"
         >
           <MenuIcon />
         </Button>
