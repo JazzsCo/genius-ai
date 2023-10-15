@@ -41,17 +41,21 @@ export default function DashboardPage() {
             <Card
               key={route.href}
               onClick={() => router.push(route.href)}
-              className="p-3 border-black/5 dark:border-gray-900 flex items-center justify-between hover:shadow-md dark:hover:shadow-gray-900 transition cursor-pointer rounded-xl"
+              className="p-2 sm:p-3 border-black/5 dark:border-gray-900 flex items-center justify-between hover:shadow-md dark:hover:shadow-gray-900 transition cursor-pointer rounded-xl"
             >
-              <div className="flex items-center gap-x-4">
+              <div className="flex items-center gap-x-4 sm:gap-x-3">
                 <div
                   className={`p-2 w-fit rounded-xl ${
                     theme === "dark" ? route.darkbgcolor : route.bgcolor
                   }`}
                 >
-                  <route.icon className={cn("w-7 h-7", route.color)} />
+                  <route.icon
+                    className={cn("w-5 h-5 sm:w-7 sm:h-7", route.color)}
+                  />
                 </div>
-                <div className="font-semibold">{route.name}</div>
+                <div className="font-semibold text-ellipsis overflow-hidden">
+                  {route.name}
+                </div>
               </div>
               <ArrowRight className="w-5 h-5" />
             </Card>
