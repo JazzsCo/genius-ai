@@ -28,7 +28,9 @@ const Heading = ({
       </div>
       <div>
         <h1 className="font-medium text-sm md:text-base lg:text-xl">{title}</h1>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground">
+          {description}
+        </p>
       </div>
     </div>
   );
