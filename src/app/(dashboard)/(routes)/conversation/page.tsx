@@ -1,13 +1,14 @@
 "use client";
 
 import * as z from "zod";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { MessageSquare } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Heading from "@/components/heading";
-import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   prompt: z.string().min(6),
@@ -38,18 +39,29 @@ export default function ConversationPage() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onsubmit)}
-            className="p-4 md:p-5 border rounded-xl grid grid-cols-12"
+            className="p-4 md:p-5 border rounded-xl grid grid-cols-12 focus-within:shadow-sm"
           >
             <FormField
               name="prompt"
+              control={form.control}
               render={({ field }) => (
                 <FormItem className="col-span-12 md:col-span-10">
-                  <FormControl>
-                    <Input />
+                  <FormControl className="p-0">
+                    <Input
+                      {...form}
+                      placeholder="Can I have your love 😘"
+                      className="border-0 outline-none focus-visible:ring-transparent"
+                    />
                   </FormControl>
                 </FormItem>
               )}
             />
+            <Button
+              type="submit"
+              className="col-span-12 md:col-span-2 rounded-xl"
+            >
+              Generate
+            </Button>
           </form>
         </Form>
       </div>
