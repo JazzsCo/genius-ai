@@ -29,7 +29,7 @@ const SideBar = () => {
         </h2>
       </Link>
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         {routes.map((route) => (
           <Link
             key={route.href}
