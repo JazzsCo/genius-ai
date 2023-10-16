@@ -6,12 +6,18 @@ import { MessageSquare } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Heading from "@/components/heading";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
-  prompt: z.string().min(6),
+  prompt: z.string().min(1),
 });
 
 export default function ConversationPage() {
@@ -22,8 +28,10 @@ export default function ConversationPage() {
     },
   });
 
+  const isLoading = form.formState.isSubmitting;
+
   const onsubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    console.log(values.prompt);
   };
 
   return (
@@ -39,7 +47,7 @@ export default function ConversationPage() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onsubmit)}
-            className="p-4 md:p-5 border rounded-xl grid grid-cols-12 focus-within:shadow-sm"
+            className="p-4 py-2 md:p-5 border rounded-xl grid items-center grid-cols-12 focus-within:shadow-sm"
           >
             <FormField
               name="prompt"
@@ -48,17 +56,20 @@ export default function ConversationPage() {
                 <FormItem className="col-span-12 md:col-span-10">
                   <FormControl className="p-0">
                     <Input
-                      {...form}
+                      {...field}
+                      disabled={isLoading}
                       placeholder="Can I have your love 😘"
-                      className="border-0 outline-none focus-visible:ring-transparent"
+                      className="border-0 md:border-r-[1px] h-7 px-3 py-5 rounded-xl outline-none focus-visible:ring-transparent"
                     />
                   </FormControl>
+                  {/* <FormMessage /> */}
                 </FormItem>
               )}
             />
             <Button
               type="submit"
-              className="col-span-12 md:col-span-2 rounded-xl"
+              disabled={isLoading}
+              className="col-span-12 md:col-span-2 rounded-xl ml-1"
             >
               Generate
             </Button>
