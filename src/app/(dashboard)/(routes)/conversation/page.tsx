@@ -12,6 +12,7 @@ export default function ConversationPage() {
         color="text-pink-600"
         bgcolor="bg-pink-700/10"
       />
+      <h1>hello</h1>
     </div>
   );
 }
