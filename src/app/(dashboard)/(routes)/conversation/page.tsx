@@ -1,7 +1,10 @@
 "use client";
 
 import * as z from "zod";
+import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { MessageSquare } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -21,6 +24,9 @@ const formSchema = z.object({
 });
 
 export default function ConversationPage() {
+  const router = useRouter();
+  const [messages, setMessages] = useState<[]>([]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,7 +37,24 @@ export default function ConversationPage() {
   const isLoading = form.formState.isSubmitting;
 
   const onsubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values.prompt);
+    try {
+      const userMessage = {
+        role: "user",
+        content: values.prompt,
+      };
+
+      const newMessages = [...messages, userMessage];
+
+      const response = await axios.post("/api/conversation", {
+        messages: newMessages,
+      });
+
+      setMessages(response.data);
+    } catch (error: any) {
+      console.log("error", error);
+    } finally {
+      router.refresh();
+    }
   };
 
   return (
