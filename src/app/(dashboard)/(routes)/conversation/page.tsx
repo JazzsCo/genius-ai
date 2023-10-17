@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Rss } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
@@ -44,13 +44,11 @@ export default function ConversationPage() {
         content: values.prompt,
       };
 
-      const newMessages = [...messages, userMessage];
-
       const response = await axios.post("/api/conversation", {
-        messages: newMessages,
+        message: userMessage,
       });
 
-      setMessages((current) => [...current, userMessage, response.data]);
+      setMessages([...messages, userMessage, response.data]);
 
       form.reset();
     } catch (error: any) {
@@ -60,6 +58,8 @@ export default function ConversationPage() {
       router.refresh();
     }
   };
+
+  console.log("MESSAGES", messages);
 
   return (
     <div className="px-[10px] md:px-5 mt-4">
