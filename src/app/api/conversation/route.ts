@@ -1,9 +1,9 @@
+import OpenAI from "openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY, // defaults to process.env["OPENAI_API_KEY"]
 });
 
 export async function POST(req: Request) {
@@ -17,8 +17,10 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!openai) {
-      return new NextResponse("Not found openai", { status: 500 });
+    if (!openai.apiKey) {
+      return new NextResponse("OpenAI API Key is required.", {
+        status: 500,
+      });
     }
 
     if (!messages) {
@@ -27,19 +29,12 @@ export async function POST(req: Request) {
 
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: "The radius of the sun",
-        },
-      ],
+      messages,
     });
 
-    console.log("[RESULT]", response);
-
-    // return NextResponse.json(response.choices[0].message);
-  } catch (error: any) {
+    return NextResponse.json(response.choices[0].message);
+  } catch (error) {
     console.log("[CONVERSATION_ERROR]", error);
-    return new NextResponse("Internal server error", { status: 500 });
+    return new NextResponse("Internal Error", { status: 500 });
   }
 }

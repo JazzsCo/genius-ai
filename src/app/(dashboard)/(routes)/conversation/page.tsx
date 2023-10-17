@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { MessageSquare } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
 import Heading from "@/components/heading";
 import {
@@ -25,7 +26,7 @@ const formSchema = z.object({
 
 export default function ConversationPage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<[]>([]);
+  const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,9 +37,9 @@ export default function ConversationPage() {
 
   const isLoading = form.formState.isSubmitting;
 
-  const onsubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage = {
+      const userMessage: ChatCompletionMessage = {
         role: "user",
         content: values.prompt,
       };
@@ -49,9 +50,12 @@ export default function ConversationPage() {
         messages: newMessages,
       });
 
-      setMessages(response.data);
+      setMessages((current) => [...current, userMessage, response.data]);
+
+      form.reset();
     } catch (error: any) {
-      console.log("error", error);
+      //TODO: Call pro modal
+      console.log(error);
     } finally {
       router.refresh();
     }
@@ -69,7 +73,7 @@ export default function ConversationPage() {
       <div className="px-2">
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onsubmit)}
+            onSubmit={form.handleSubmit(onSubmit)}
             className="p-4 py-2 md:p-5 border rounded-xl grid items-center grid-cols-12 focus-within:shadow-sm"
           >
             <FormField
