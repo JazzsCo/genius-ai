@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Loading from "@/components/loading";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -105,19 +106,24 @@ export default function ConversationPage() {
         </Form>
       </div>
 
-      <div className="px-2 mt-6 flex flex-col-reverse gap-y-3">
-        {!messages.length && <Empty title="No conversation started." />}
-        {messages.map((message) => (
-          <div
-            key={message.content}
-            className={cn(
-              "p-5 py-3 flex justify-start items-center gap-x-2 border rounded-xl",
-              message.role !== "user" ? "bg-muted" : ""
-            )}
-          >
-            <p className="">{message.content}</p>
-          </div>
-        ))}
+      <div className="px-2 mt-6">
+        {isLoading && <Loading />}
+        {!messages.length && !isLoading && (
+          <Empty title="No conversation started." />
+        )}
+        <div className="flex flex-col-reverse gap-y-3 mt-3">
+          {messages.map((message) => (
+            <div
+              key={message.content}
+              className={cn(
+                "p-5 py-3 flex justify-start items-center gap-x-2 border rounded-xl",
+                message.role !== "user" ? "bg-muted" : ""
+              )}
+            >
+              <p className="">{message.content}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

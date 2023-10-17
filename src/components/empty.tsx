@@ -6,7 +6,7 @@ interface EmptyProps {
 
 const Empty = ({ title }: EmptyProps) => {
   return (
-    <div className="mt-8 h-full flex flex-col justify-center items-center">
+    <div className="h-full flex flex-col justify-center items-center">
       <div className="relative w-64 h-64 md:w-72 md:h-72">
         <Image fill alt="Empty" src={"/empty.png"} />
       </div>
