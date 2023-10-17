@@ -9,6 +9,7 @@ import { MessageSquare, Rss } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
+import Empty from "@/components/empty";
 import Heading from "@/components/heading";
 import {
   Form,
@@ -105,6 +106,7 @@ export default function ConversationPage() {
       </div>
 
       <div className="px-2 mt-6 flex flex-col-reverse gap-y-3">
+        {!messages.length && <Empty title="No conversation started." />}
         {messages.map((message) => (
           <div
             key={message.content}
