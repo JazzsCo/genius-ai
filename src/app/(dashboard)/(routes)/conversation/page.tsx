@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -59,8 +60,6 @@ export default function ConversationPage() {
     }
   };
 
-  console.log("MESSAGES", messages);
-
   return (
     <div className="px-[10px] md:px-5 mt-4">
       <Heading
@@ -70,6 +69,7 @@ export default function ConversationPage() {
         color="text-pink-600"
         bgcolor="bg-pink-700/10"
       />
+
       <div className="px-2">
         <Form {...form}>
           <form
@@ -102,6 +102,20 @@ export default function ConversationPage() {
             </Button>
           </form>
         </Form>
+      </div>
+
+      <div className="px-2 mt-6 flex flex-col-reverse gap-y-3">
+        {messages.map((message) => (
+          <div
+            key={message.content}
+            className={cn(
+              "p-5 py-3 flex justify-start items-center gap-x-2 border rounded-xl",
+              message.role !== "user" ? "bg-muted" : ""
+            )}
+          >
+            <p className="">{message.content}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
