@@ -65,7 +65,7 @@ export const routes = [
   },
 ];
 
-export const amounts = [
+export const amountOptions = [
   {
     value: "1",
     name: "1 photo",
