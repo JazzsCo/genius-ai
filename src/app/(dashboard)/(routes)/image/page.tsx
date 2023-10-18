@@ -31,7 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { amountOptions } from "@/constant";
+import { amountOptions, resolutionOptions } from "@/constant";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -91,7 +91,7 @@ export default function ImagePage() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="p-4 py-2 md:p-5 space-y-1 md:space-y-0 border rounded-xl grid items-center grid-cols-12 focus-within:shadow-sm"
+            className="p-4 py-2 md:p-5 space-y-1 md:space-y-0 border rounded-xl grid items-center grid-cols-12 gap-x-1 focus-within:shadow-sm"
           >
             <FormField
               name="prompt"
@@ -128,6 +128,33 @@ export default function ImagePage() {
                     </FormControl>
                     <SelectContent>
                       {amountOptions.map((option) => (
+                        <SelectItem key={option?.name} value={option?.value!}>
+                          {option?.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="resolution"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="col-span-12 md:col-span-2">
+                  <Select
+                    value={field.value}
+                    disabled={isLoading}
+                    defaultValue={field.value}
+                    onValueChange={field.onChange}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue defaultValue={field.value} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {resolutionOptions.map((option) => (
                         <SelectItem key={option?.name} value={option?.value!}>
                           {option?.name}
                         </SelectItem>
