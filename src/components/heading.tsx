@@ -1,5 +1,7 @@
-import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 import { LucideIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
 
 interface HeadingProps {
   title: string;
@@ -7,6 +9,7 @@ interface HeadingProps {
   icon: LucideIcon;
   color: string;
   bgcolor?: string;
+  darkbgcolor?: string;
 }
 
 const Heading = ({
@@ -15,14 +18,16 @@ const Heading = ({
   icon: Icon,
   color,
   bgcolor,
+  darkbgcolor,
 }: HeadingProps) => {
+  const theme = useTheme().theme;
+
   return (
     <div className="flex items-center space-x-3 mb-6">
       <div
-        className={cn(
-          "p-2 lg:p-3 w-fit rounded-xl dark:bg-pink-700/25",
-          bgcolor
-        )}
+        className={`p-2 lg:p-3 w-fit rounded-xl ${
+          theme === "dark" ? darkbgcolor : bgcolor
+        }`}
       >
         <Icon className={cn("w-5 h-5 sm:w-7 sm:h-7", color)} />
       </div>

@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { MessageSquare, Rss } from "lucide-react";
+import { Code } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
@@ -29,7 +29,7 @@ const formSchema = z.object({
   prompt: z.string().min(1),
 });
 
-export default function ConversationPage() {
+export default function CodePage() {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
@@ -49,7 +49,7 @@ export default function ConversationPage() {
         content: values.prompt,
       };
 
-      const response = await axios.post("/api/conversation", {
+      const response = await axios.post("/api/code", {
         message: userMessage,
       });
 
@@ -67,12 +67,12 @@ export default function ConversationPage() {
   return (
     <div className="h-full px-[10px] md:px-5 mt-4">
       <Heading
-        title="Conversation"
-        description="Conversation with AI."
-        icon={MessageSquare}
-        color="text-pink-600"
-        bgcolor="bg-pink-700/10"
-        darkbgcolor="bg-pink-700/25"
+        title="Code Generation"
+        description="Generate you code with ai."
+        icon={Code}
+        color="text-cyan-600"
+        bgcolor="bg-cyan-700/10"
+        darkbgcolor="bg-cyan-700/25"
       />
 
       <div className="px-2">
@@ -90,7 +90,7 @@ export default function ConversationPage() {
                     <Input
                       {...field}
                       disabled={isLoading}
-                      placeholder="Can I have your love 😘"
+                      placeholder="Create react button with tailwindcss 🧠"
                       className="border-0 md:border-r-[1px] h-7 px-3 py-5 rounded-xl outline-none focus-visible:ring-transparent"
                     />
                   </FormControl>
@@ -111,9 +111,7 @@ export default function ConversationPage() {
 
       <div className="px-2 mt-6">
         {isLoading && <Loading />}
-        {!messages.length && !isLoading && (
-          <Empty title="No conversation started." />
-        )}
+        {!messages.length && !isLoading && <Empty title="No code started." />}
         <div className="flex flex-col-reverse gap-y-3 mt-3">
           {messages.map((message) => (
             <div
