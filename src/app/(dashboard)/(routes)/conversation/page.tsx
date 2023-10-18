@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Loading from "@/components/loading";
+import BotAvatar from "@/components/botavatar";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -120,6 +121,7 @@ export default function ConversationPage() {
                 message.role !== "user" ? "bg-muted" : ""
               )}
             >
+              <BotAvatar />
               <p className="">{message.content}</p>
             </div>
           ))}
