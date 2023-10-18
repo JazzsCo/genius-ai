@@ -116,10 +116,10 @@ export default function ImagePage() {
               render={({ field }) => (
                 <FormItem className="col-span-12 md:col-span-2 md:ml-1">
                   <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
                     value={field.value}
                     disabled={isLoading}
+                    defaultValue={field.value}
+                    onValueChange={field.onChange}
                   >
                     <FormControl>
                       <SelectTrigger>
