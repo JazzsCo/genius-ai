@@ -9,6 +9,11 @@ import { Code } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
+import Markdown from "react-markdown";
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 import Empty from "@/components/empty";
 import Heading from "@/components/heading";
 import Loading from "@/components/loading";
@@ -52,6 +57,8 @@ export default function CodePage() {
       const response = await axios.post("/api/code", {
         message: userMessage,
       });
+
+      console.log("Data", response.data);
 
       setMessages([...messages, userMessage, response.data]);
 
@@ -113,7 +120,7 @@ export default function CodePage() {
         {isLoading && <Loading />}
         {!messages.length && !isLoading && <Empty title="No code started." />}
         <div className="flex flex-col-reverse gap-y-3 mt-3">
-          {messages.map((message) => (
+          {/* {messages.map((message) => (
             <div
               key={message.content}
               className={cn(
@@ -124,6 +131,40 @@ export default function CodePage() {
               {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
               <p className="text-sm mt-1.5">{message.content}</p>
             </div>
+          ))} */}
+
+          {messages.map((message) => (
+            <>
+              {message.role === "assistant" ? (
+                <Markdown
+                  // eslint-disable-next-line react/no-children-prop
+                  children={message.content}
+                  components={{
+                    code(props) {
+                      const { children, className, node, ...rest } = props;
+                      const match = /language-(\w+)/.exec(className || "");
+                      return match ? (
+                        //@ts-ignore
+                        <SyntaxHighlighter
+                          {...rest}
+                          // eslint-disable-next-line react/no-children-prop
+                          children={String(children).replace(/\n$/, "")}
+                          style={docco}
+                          language={match[1]}
+                          PreTag="div"
+                        />
+                      ) : (
+                        <code {...rest} className={className}>
+                          {children}
+                        </code>
+                      );
+                    },
+                  }}
+                />
+              ) : (
+                <div>hello</div>
+              )}
+            </>
           ))}
         </div>
       </div>
