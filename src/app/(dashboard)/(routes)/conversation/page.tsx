@@ -11,6 +11,9 @@ import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
 import Empty from "@/components/empty";
 import Heading from "@/components/heading";
+import Loading from "@/components/loading";
+import BotAvatar from "@/components/botavatar";
+import UserAvatar from "@/components/useravatar";
 import {
   Form,
   FormControl,
@@ -18,11 +21,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Loading from "@/components/loading";
-import BotAvatar from "@/components/botavatar";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -117,12 +118,12 @@ export default function ConversationPage() {
             <div
               key={message.content}
               className={cn(
-                "p-5 py-3 flex justify-start items-center gap-x-2 border rounded-xl",
+                "p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl",
                 message.role !== "user" ? "bg-muted" : ""
               )}
             >
-              <BotAvatar />
-              <p className="">{message.content}</p>
+              <UserAvatar />
+              <p className="text-sm mt-1.5">{message.content}</p>
             </div>
           ))}
         </div>
