@@ -24,6 +24,14 @@ import {
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { amountOptions } from "@/constant";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -39,8 +47,8 @@ export default function ImagePage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      amount: "",
-      resolution: "",
+      amount: "1",
+      resolution: "256x256",
     },
   });
 
@@ -102,24 +110,37 @@ export default function ImagePage() {
                 </FormItem>
               )}
             />
+            <FormField
+              name="amount"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="col-span-12 md:col-span-2 md:ml-1">
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    value={field.value}
+                    disabled={isLoading}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue defaultValue={field.value} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {amountOptions.map((option) => (
+                        <SelectItem key={option?.name} value={option?.value!}>
+                          {option?.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
             <Button
               type="submit"
               disabled={isLoading}
-              className="col-span-12 md:col-span-2 rounded-xl md:ml-1"
-            >
-              Generate
-            </Button>
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="col-span-12 md:col-span-2 rounded-xl md:ml-1"
-            >
-              Generate
-            </Button>
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="col-span-12 md:col-span-2 rounded-xl md:ml-1"
+              className="col-span-12 md:col-span-2 rounded-xl"
             >
               Generate
             </Button>
