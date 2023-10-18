@@ -65,7 +65,7 @@ export default function ConversationPage() {
   };
 
   return (
-    <div className="px-[10px] md:px-5 mt-4">
+    <div className="h-full px-[10px] md:px-5 mt-4">
       <Heading
         title="Conversation"
         description="Conversation with AI."
@@ -122,7 +122,7 @@ export default function ConversationPage() {
                 message.role !== "user" ? "bg-muted" : ""
               )}
             >
-              <UserAvatar />
+              {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
               <p className="text-sm mt-1.5">{message.content}</p>
             </div>
           ))}
