@@ -10,7 +10,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  dracula,
+  oneLight,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import Empty from "@/components/empty";
 import Heading from "@/components/heading";
@@ -27,6 +30,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -44,6 +48,7 @@ export default function CodePage() {
   });
 
   const isLoading = form.formState.isSubmitting;
+  const theme = useTheme().theme;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -144,7 +149,7 @@ export default function CodePage() {
                             {...rest}
                             // eslint-disable-next-line react/no-children-prop
                             children={String(children).replace(/\n$/, "")}
-                            style={dracula}
+                            style={theme === "dark" ? dracula : oneLight}
                             language={match[1]}
                             PreTag="div"
                           />
