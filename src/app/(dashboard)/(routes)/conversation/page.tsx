@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { MessageSquare, Rss } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
