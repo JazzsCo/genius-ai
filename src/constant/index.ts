@@ -64,3 +64,28 @@ export const routes = [
     color: "text-slate-500",
   },
 ];
+
+export const amounts = [
+  {
+    value: "1",
+    name: "1 photo",
+  },
+  {
+    value: "2",
+    name: "2 photos",
+  },
+  {
+    value: "3",
+    name: "3 photos",
+  },
+  ,
+  {
+    value: "4",
+    name: "4 photos",
+  },
+  ,
+  {
+    value: "5",
+    name: "5 photos",
+  },
+];
