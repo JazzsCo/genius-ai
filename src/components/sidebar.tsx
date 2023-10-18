@@ -16,8 +16,8 @@ const SideBar = () => {
   return (
     <div className="flex flex-col h-full px-5 lg:px-8 py-6">
       <Link href={"/"} className="flex w-fit space-x-2 mb-8">
-        <div className="relative h-6 w-6">
-          <Image fill alt="Logp" src={"/logo.png"} />
+        <div className="relative h-7 w-7">
+          <Image fill alt="Logp" src={"/favicon-dev.png"} />
         </div>
         <h2
           className={cn(
