@@ -89,3 +89,18 @@ export const amountOptions = [
     name: "5 photos",
   },
 ];
+
+export const resolutionOptions = [
+  {
+    value: "256x256",
+    name: "256x256",
+  },
+  {
+    value: "512x512",
+    name: "512x512",
+  },
+  {
+    value: "1024x1024",
+    name: "1024x1024",
+  },
+];
