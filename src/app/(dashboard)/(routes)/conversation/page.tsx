@@ -124,7 +124,7 @@ export default function ConversationPage() {
               )}
             >
               {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-              <p className="text-sm mt-1.5">{message.content}</p>
+              <p className="text-[15px] mt-1.5 leading-6">{message.content}</p>
             </div>
           ))}
         </div>
