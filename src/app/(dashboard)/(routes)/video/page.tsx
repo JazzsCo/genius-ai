@@ -48,9 +48,7 @@ export default function VideoPage() {
         prompt: values.prompt,
       });
 
-      console.log("response", response);
-
-      //   setData([...data, { content: userMessage, url: response.data.audio }]);
+      setData([...data, { content: userMessage, url: response.data[0] }]);
 
       form.reset();
     } catch (error: any) {
@@ -111,7 +109,7 @@ export default function VideoPage() {
         {!data.length && !isLoading && (
           <Empty title="No conversation started." />
         )}
-        {/* <div className="flex flex-col-reverse gap-y-3 mt-3">
+        <div className="flex flex-col-reverse gap-y-3 mt-3">
           {data.map((item: any) => (
             <>
               <div
@@ -122,13 +120,12 @@ export default function VideoPage() {
                 <p className="text-[15px] mt-1.5 leading-6">{item.content}</p>
               </div>
 
-              <div className="p-5 py-3 flex justify-start items-center gap-x-2 border rounded-xl bg-muted">
-                <BotAvatar />
-                <audio controls src={item.url} className="w-full" />
-              </div>
+              <video className="w-full rounded-xl aspect-video" controls>
+                <source src={item.url} />
+              </video>
             </>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );
