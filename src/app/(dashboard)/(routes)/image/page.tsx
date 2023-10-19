@@ -5,9 +5,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { ImageIcon } from "lucide-react";
+import { Download, ImageIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
 import Empty from "@/components/empty";
 import Heading from "@/components/heading";
@@ -32,6 +31,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { amountOptions, resolutionOptions } from "@/constant";
+import { Card, CardFooter } from "@/components/ui/card";
+import Image from "next/image";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -41,7 +42,7 @@ const formSchema = z.object({
 
 export default function ImagePage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
+  const [data, setData] = useState<[]>([]) as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,18 +57,13 @@ export default function ImagePage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      // const userMessage: ChatCompletionMessage = {
-      //   role: "user",
-      //   content: values.prompt,
-      // };
+      const userMessage = values.prompt;
 
       const response = await axios.post("/api/image", {
         values,
       });
 
-      // setMessages([...messages, userMessage, response.data]);
-
-      console.log("Data", response.data);
+      setData([...data, { content: userMessage, urls: response.data }]);
 
       form.reset();
     } catch (error: any) {
@@ -77,6 +73,8 @@ export default function ImagePage() {
       router.refresh();
     }
   };
+
+  console.log("data", data);
 
   return (
     <div className="h-full px-[10px] md:px-5 mt-4">
@@ -179,21 +177,46 @@ export default function ImagePage() {
 
       <div className="px-2 mt-6">
         {isLoading && <Loading />}
-        {!messages.length && !isLoading && (
-          <Empty title="No conversation started." />
+        {!data.length && !isLoading && (
+          <Empty title="No image generation started." />
         )}
         <div className="flex flex-col-reverse gap-y-3 mt-3">
-          {messages.map((message) => (
-            <div
-              key={message.content}
-              className={cn(
-                "p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl",
-                message.role !== "user" ? "bg-muted" : ""
-              )}
-            >
-              {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-              <p className="text-[15px] mt-1.5 leading-6">{message.content}</p>
-            </div>
+          {data.map((item: any) => (
+            <>
+              <div
+                key={item.content}
+                className="p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl"
+              >
+                <UserAvatar />
+                <p className="text-[15px] mt-1.5 leading-6">{item.content}</p>
+              </div>
+
+              <div className="p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl bg-muted">
+                <BotAvatar />
+                <div className="flex flex-wrap justify-center gap-3 xl:gap-5 mt-1.5">
+                  {item.urls.map((image: any) => (
+                    <Card
+                      key={image.url}
+                      className="rounded-xl overflow-hidden"
+                    >
+                      <div className="relative aspect-square w-[190px]">
+                        <Image fill alt="Image" src={image.url} />
+                      </div>
+                      <CardFooter className="p-2">
+                        <Button
+                          onClick={() => window.open(image.url)}
+                          variant="outline"
+                          className="rounded-xl w-full"
+                        >
+                          <Download className="h-4 w-4 mr-2" />
+                          <p className="text-sm">Download</p>
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </>
           ))}
         </div>
       </div>

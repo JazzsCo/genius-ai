@@ -121,7 +121,9 @@ export default function CodePage() {
 
       <div className="px-2 mt-6">
         {isLoading && <Loading />}
-        {!messages.length && !isLoading && <Empty title="No code started." />}
+        {!messages.length && !isLoading && (
+          <Empty title="No code generation started." />
+        )}
 
         <div className="flex flex-col-reverse gap-y-3 mt-3">
           {messages.map((message) => (
