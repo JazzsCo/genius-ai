@@ -44,7 +44,7 @@ export default function VideoPage() {
     try {
       const userMessage = values.prompt;
 
-      const response = await axios.post("/api/music", {
+      const response = await axios.post("/api/video", {
         prompt: values.prompt,
       });
 
