@@ -11,7 +11,9 @@ export async function POST(req: Request) {
     const { userId } = auth();
 
     const body = await req.json();
-    const { prompt, amount, resolution } = body.values;
+    const { prompt } = body;
+
+    console.log(prompt);
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -27,23 +29,16 @@ export async function POST(req: Request) {
       return new NextResponse("Prompt is required", { status: 400 });
     }
 
-    if (!amount) {
-      return new NextResponse("Amount is required", { status: 400 });
-    }
+    return NextResponse.json("ok");
 
-    if (!resolution) {
-      return new NextResponse("Resolution is required", { status: 400 });
-    }
+    // const response = await openai.chat.completions.create({
+    //   model: "gpt-3.5-turbo",
+    //   messages: [message],
+    // });
 
-    const response = await openai.images.generate({
-      prompt,
-      n: Number(amount),
-      size: resolution,
-    });
-
-    return NextResponse.json(response.data);
+    // return NextResponse.json(response.choices[0].message);
   } catch (error) {
-    console.log("[IMAGE_ERROR]", error);
+    console.log("[MUSIC_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
