@@ -56,16 +56,18 @@ export default function ImagePage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage: ChatCompletionMessage = {
-        role: "user",
-        content: values.prompt,
-      };
+      // const userMessage: ChatCompletionMessage = {
+      //   role: "user",
+      //   content: values.prompt,
+      // };
 
-      const response = await axios.post("/api/conversation", {
-        message: userMessage,
+      const response = await axios.post("/api/image", {
+        values,
       });
 
-      setMessages([...messages, userMessage, response.data]);
+      // setMessages([...messages, userMessage, response.data]);
+
+      console.log("Data", response.data);
 
       form.reset();
     } catch (error: any) {
