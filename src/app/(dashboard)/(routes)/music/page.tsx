@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Music } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChatCompletionMessage } from "openai/resources/index.mjs";
 
 import Empty from "@/components/empty";
 import Heading from "@/components/heading";
@@ -21,7 +20,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -31,7 +29,7 @@ const formSchema = z.object({
 
 export default function MusicPage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
+  const [data, setData] = useState<[]>([]) as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,16 +42,13 @@ export default function MusicPage() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage: ChatCompletionMessage = {
-        role: "user",
-        content: values.prompt,
-      };
+      const userMessage = values.prompt;
 
       const response = await axios.post("/api/music", {
         prompt: values.prompt,
       });
 
-      //   setMessages([...messages, userMessage, response.data]);
+      setData([...data, { content: userMessage, url: response.data.audio }]);
 
       form.reset();
     } catch (error: any) {
@@ -111,21 +106,25 @@ export default function MusicPage() {
 
       <div className="px-2 mt-6">
         {isLoading && <Loading />}
-        {!messages.length && !isLoading && (
+        {!data.length && !isLoading && (
           <Empty title="No conversation started." />
         )}
         <div className="flex flex-col-reverse gap-y-3 mt-3">
-          {messages.map((message) => (
-            <div
-              key={message.content}
-              className={cn(
-                "p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl",
-                message.role !== "user" ? "bg-muted" : ""
-              )}
-            >
-              {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-              <p className="text-[15px] mt-1.5 leading-6">{message.content}</p>
-            </div>
+          {data.map((item: any) => (
+            <>
+              <div
+                key={item.content}
+                className="p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl"
+              >
+                <UserAvatar />
+                <p className="text-[15px] mt-1.5 leading-6">{item.content}</p>
+              </div>
+
+              <div className="p-5 py-3 flex justify-start items-center gap-x-2 border rounded-xl bg-muted">
+                <BotAvatar />
+                <audio controls src={item.url} className="w-full" />
+              </div>
+            </>
           ))}
         </div>
       </div>
