@@ -104,3 +104,5 @@ export const resolutionOptions = [
     name: "1024x1024",
   },
 ];
+
+export const MAX_FREE_COUNTS = 5;
