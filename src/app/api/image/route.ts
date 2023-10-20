@@ -2,6 +2,8 @@ import OpenAI from "openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+import { checkUserApiLimit, increaseUserApiLimit } from "@/lib/api-limit";
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // defaults to process.env["OPENAI_API_KEY"]
 });
@@ -35,11 +37,19 @@ export async function POST(req: Request) {
       return new NextResponse("Resolution is required", { status: 400 });
     }
 
+    const freeTrial = await checkUserApiLimit();
+
+    if (!freeTrial) {
+      return new NextResponse("Freetrial is expired.", { status: 403 });
+    }
+
     const response = await openai.images.generate({
       prompt,
       n: Number(amount),
       size: resolution,
     });
+
+    await increaseUserApiLimit();
 
     return NextResponse.json(response.data);
   } catch (error) {
