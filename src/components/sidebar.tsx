@@ -7,14 +7,19 @@ import { Montserrat } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { routes } from "@/constant";
+import PremiumUser from "@/components/premium-user";
 
 const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 
-const SideBar = () => {
+interface SideBarProps {
+  userApiLimitCount?: number;
+}
+
+const SideBar = ({ userApiLimitCount }: SideBarProps) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col h-full px-5 lg:px-8 py-6">
+    <div className="flex flex-col w-full h-full px-5 lg:px-8 py-6">
       <Link href={"/"} className="flex w-fit space-x-2 mb-8">
         <div className="relative h-7 w-7">
           <Image fill alt="Logp" src={"/favicon-dev.png"} />
@@ -29,7 +34,7 @@ const SideBar = () => {
         </h2>
       </Link>
 
-      <div className="space-y-2">
+      <div className="space-y-2 flex-1">
         {routes.map((route) => (
           <Link
             key={route.href}
@@ -53,6 +58,8 @@ const SideBar = () => {
           </Link>
         ))}
       </div>
+
+      <PremiumUser userApiLimitCount={userApiLimitCount} />
     </div>
   );
 };
