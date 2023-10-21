@@ -1,7 +1,7 @@
 "use client";
 
 import * as z from "zod";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -31,6 +32,7 @@ const formSchema = z.object({
 
 export default function ConversationPage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -57,8 +59,9 @@ export default function ConversationPage() {
 
       form.reset();
     } catch (error: any) {
-      //TODO: Call pro modal
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

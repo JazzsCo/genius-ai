@@ -31,6 +31,8 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import { useProModal } from "@/hooks/use-pro-modal";
+import Error, { ErrorProps } from "next/error";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -38,6 +40,7 @@ const formSchema = z.object({
 
 export default function CodePage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,14 +64,13 @@ export default function CodePage() {
         message: userMessage,
       });
 
-      console.log("Data", response.data);
-
       setMessages([...messages, userMessage, response.data]);
 
       form.reset();
     } catch (error: any) {
-      //TODO: Call pro modal
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

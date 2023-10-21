@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -29,6 +30,7 @@ const formSchema = z.object({
 
 export default function VideoPage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [data, setData] = useState<[]>([]) as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,8 +54,9 @@ export default function VideoPage() {
 
       form.reset();
     } catch (error: any) {
-      //TODO: Call pro modal
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

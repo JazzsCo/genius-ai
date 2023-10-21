@@ -33,6 +33,7 @@ import {
 import { amountOptions, resolutionOptions } from "@/constant";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const formSchema = z.object({
   prompt: z.string().min(1),
@@ -42,6 +43,7 @@ const formSchema = z.object({
 
 export default function ImagePage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [data, setData] = useState<[]>([]) as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -67,8 +69,9 @@ export default function ImagePage() {
 
       form.reset();
     } catch (error: any) {
-      //TODO: Call pro modal
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }
