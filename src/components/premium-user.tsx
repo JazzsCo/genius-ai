@@ -21,7 +21,10 @@ const PremiumUser = ({ userApiLimitCount }: PremiumUserProps) => {
           className="h-3 bg-white dark:bg-secondary"
         />
       </div>
-      <Button className="rounded-xl w-full bg-gradient-to-r from-violet-500 via-pink-500 to-red-500 text-white font-semibold">
+      <Button
+        variant="preminum"
+        className="rounded-xl w-full text-white font-semibold"
+      >
         Upgrade <Zap className="w-4 h-4 ml-2 fill-white" />
       </Button>
     </div>
