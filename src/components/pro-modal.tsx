@@ -14,11 +14,7 @@ const ProModal = () => {
   if (!isMounted) {
     return null;
   }
-  return (
-    <div className="flex flex-1 justify-center items-center">
-      <Modal />
-    </div>
-  );
+  return <Modal />;
 };
 
 export default ProModal;

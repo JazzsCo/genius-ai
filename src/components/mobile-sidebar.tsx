@@ -6,7 +6,11 @@ import SideBar from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-const MobileSideBar = () => {
+interface MobileSideBarProps {
+  userApiLimitCount: number;
+}
+
+const MobileSideBar = ({ userApiLimitCount }: MobileSideBarProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -19,7 +23,7 @@ const MobileSideBar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <SideBar />
+        <SideBar userApiLimitCount={userApiLimitCount} />
       </SheetContent>
     </Sheet>
   );

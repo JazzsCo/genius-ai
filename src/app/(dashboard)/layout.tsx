@@ -22,7 +22,7 @@ export default async function layout({
       <div className="w-full md:pl-64 lg:pl-72">
         <nav className="flex items-center justify-between md:justify-end px-5 pt-3">
           <div className="flex md:hidden">
-            <MobileSideBar />
+            <MobileSideBar userApiLimitCount={apiLimitCount} />
           </div>
           <div className="flex items-center space-x-3">
             <ThemeButton />
