@@ -12,7 +12,7 @@ import PremiumUser from "@/components/premium-user";
 const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 
 interface SideBarProps {
-  userApiLimitCount?: number;
+  userApiLimitCount: number;
 }
 
 const SideBar = ({ userApiLimitCount }: SideBarProps) => {
