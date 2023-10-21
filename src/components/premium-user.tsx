@@ -18,11 +18,11 @@ const PremiumUser = ({ userApiLimitCount }: PremiumUserProps) => {
 
         <Progress
           value={(userApiLimitCount / MAX_FREE_COUNTS) * 100}
-          className="h-3 text-black/5"
+          className="h-3 bg-white dark:bg-secondary"
         />
       </div>
-      <Button className="rounded-xl w-full bg-gradient-to-r from-pink-500 via-red-400 to-amber-500 text-black/70 font-semibold">
-        Upgrade <Zap className="w-4 h-4 ml-2 fill-zinc-700" />
+      <Button className="rounded-xl w-full bg-gradient-to-r from-violet-500 via-pink-500 to-red-500 text-white font-semibold">
+        Upgrade <Zap className="w-4 h-4 ml-2 fill-white" />
       </Button>
     </div>
   );
