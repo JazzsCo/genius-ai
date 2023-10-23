@@ -29,6 +29,8 @@ export async function GET() {
       return NextResponse.json({ url: stripeSession.url });
     }
 
+    console.log("Hello World...");
+
     const stripeSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       success_url: settingUrl,
@@ -36,9 +38,6 @@ export async function GET() {
       payment_method_types: ["card"],
       billing_address_collection: "auto",
       customer_email: user.emailAddresses[0].emailAddress,
-      metadata: {
-        userId,
-      },
       line_items: [
         {
           quantity: 1,
@@ -55,6 +54,9 @@ export async function GET() {
           },
         },
       ],
+      metadata: {
+        userId,
+      },
     });
 
     return NextResponse.json({ url: stripeSession.url });
