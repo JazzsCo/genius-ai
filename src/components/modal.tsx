@@ -22,21 +22,25 @@ import { routes } from "@/constant";
 
 const Modal = () => {
   const proModal = useProModal();
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const theme = useTheme().theme;
 
-  // const onSubscribe = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await axios.get("/api/stripe");
+  const onSubscribe = async () => {
+    try {
+      console.log("hello");
+      setLoading(true);
+      const response = await axios.get("/api/stripe");
 
-  //     window.location.href = response.data.url;
-  //   } catch (error) {
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      console.log("Data", response.data);
+
+      window.location.href = response.data.url;
+    } catch (error) {
+      console.log("Error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -82,8 +86,8 @@ const Modal = () => {
         </DialogHeader>
         <DialogFooter>
           <Button
-            // disabled={loading}
-            // onClick={onSubscribe}
+            disabled={loading}
+            onClick={onSubscribe}
             variant="preminum"
             className="w-full rounded-xl text-white"
           >

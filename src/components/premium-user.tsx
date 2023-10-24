@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Zap } from "lucide-react";
 
 import { MAX_FREE_COUNTS } from "@/constant";

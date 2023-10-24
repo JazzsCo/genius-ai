@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import prisma from "@/lib/prismadb";
@@ -7,7 +7,8 @@ import { absoluteUrl } from "@/constant";
 
 export async function GET() {
   try {
-    const { userId, user } = auth();
+    const { userId } = auth();
+    const user = await currentUser();
     const settingUrl = absoluteUrl("/setting");
 
     if (!userId || !user) {
