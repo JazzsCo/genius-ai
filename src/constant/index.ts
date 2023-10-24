@@ -107,6 +107,8 @@ export const resolutionOptions = [
 
 export const MAX_FREE_COUNTS = 5;
 
+export const DAY_IN_MS = 86_400_00;
+
 export const absoluteUrl = (path: string) => {
   return process.env.NEXT_PUBLIC_URL + path;
 };
