@@ -31,8 +31,6 @@ const Modal = () => {
       setLoading(true);
       const response = await axios.get("/api/stripe");
 
-      console.log("Data", response.data);
-
       window.location.href = response.data.url;
     } catch (error) {
       console.log("Error", error);
