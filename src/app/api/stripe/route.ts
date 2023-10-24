@@ -29,8 +29,6 @@ export async function GET() {
       return NextResponse.json({ url: stripeSession.url });
     }
 
-    console.log("Hello World...");
-
     const stripeSession = await stripe.checkout.sessions.create({
       mode: "subscription",
       success_url: settingUrl,
