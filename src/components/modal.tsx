@@ -28,7 +28,6 @@ const Modal = () => {
 
   const onSubscribe = async () => {
     try {
-      console.log("hello");
       setLoading(true);
       const response = await axios.get("/api/stripe");
 
