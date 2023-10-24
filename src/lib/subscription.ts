@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/prismadb";
 import { DAY_IN_MS } from "@/constant";
 
-export const subscription = async () => {
+export const checkSubscription = async () => {
   const { userId } = auth();
 
   if (!userId) {
