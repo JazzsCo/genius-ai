@@ -40,14 +40,14 @@ const SideBar = ({ userApiLimitCount }: SideBarProps) => {
             key={route.href}
             href={route.href}
             className={cn(
-              "p-3 px-5 lg:px-7 flex space-x-4 lg:space-x-5 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700",
+              "p-3 px-5 lg:px-7 flex space-x-4 lg:space-x-5 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 group",
               pathname === route.href ? "bg-slate-200 dark:bg-slate-700" : ""
             )}
           >
             <route.icon className={cn("w-5 h-5", route.color)} />
             <h4
               className={cn(
-                "text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200",
+                "text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200",
                 pathname === route.href
                   ? "text-gray-900 dark:text-gray-200"
                   : ""

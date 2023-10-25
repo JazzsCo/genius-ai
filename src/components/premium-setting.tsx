@@ -1,9 +1,8 @@
-import { checkSubscription } from "@/lib/subscription";
-import PremiumButton from "@/components/premium-button";
 import { checkUserApiLimit } from "@/lib/api-limit";
+import PremiumButton from "@/components/premium-button";
 
 const PremiumSetting = async () => {
-  const isPro = await checkSubscription();
+  const isPro = await checkUserApiLimit();
 
   return (
     <div className="flex items-center gap-2">
