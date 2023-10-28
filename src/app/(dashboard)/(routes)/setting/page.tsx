@@ -3,7 +3,8 @@
 import { Settings } from "lucide-react";
 
 import Heading from "@/components/heading";
-import PremiumSetting from "@/components/premium-setting";
+// import PremiumSetting from "@/components/premium-setting";
+// import PremiumButton from "@/components/premium-button";
 
 export default function SettingPage() {
   return (
@@ -17,9 +18,7 @@ export default function SettingPage() {
         darkbgcolor="bg-slate-700/25"
       />
 
-      <div className="px-2">
-        <PremiumSetting />
-      </div>
+      <div className="px-2">{/* <PremiumButton /> */}</div>
     </div>
   );
 }
