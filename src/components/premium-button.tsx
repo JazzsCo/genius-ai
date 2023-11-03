@@ -1,10 +1,11 @@
+"use client";
+
 import { Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { checkSubscription } from "@/lib/subscription";
 
-const PremiumButton = async () => {
-  const isPro = await checkSubscription();
+const PremiumButton = ({ isPro }: { isPro: boolean }) => {
   return (
     <>
       {isPro ? (
