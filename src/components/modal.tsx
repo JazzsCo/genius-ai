@@ -36,6 +36,8 @@ const Modal = () => {
       console.log("Error", error);
     } finally {
       setLoading(false);
+
+      console.log("first");
     }
   };
 
