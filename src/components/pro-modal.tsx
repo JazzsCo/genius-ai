@@ -14,6 +14,7 @@ const ProModal = () => {
   if (!isMounted) {
     return null;
   }
+
   return <Modal />;
 };
 
