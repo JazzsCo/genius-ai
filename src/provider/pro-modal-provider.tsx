@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import Modal from "@/components/modal";
 
-const ProModal = () => {
+const ProModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -18,4 +18,4 @@ const ProModal = () => {
   return <Modal />;
 };
 
-export default ProModal;
+export default ProModalProvider;
