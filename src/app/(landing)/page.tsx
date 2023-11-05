@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import ThemeButton from "@/components/theme-button";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
         Im come back baby.
       </h1>
 
-      <ThemeButton />
+      <ThemeToggle />
 
       <div className="flex gap-4">
         <Link href={"/sign-in"}>

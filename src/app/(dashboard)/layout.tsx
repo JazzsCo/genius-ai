@@ -2,7 +2,7 @@ import React from "react";
 import { UserButton } from "@clerk/nextjs";
 
 import SideBar from "@/components/sidebar";
-import ThemeButton from "@/components/theme-button";
+import ThemeToggle from "@/components/theme-toggle";
 import MobileSideBar from "@/components/mobile-sidebar";
 import { userApiLimitCount } from "@/lib/api-limit";
 
@@ -25,7 +25,7 @@ export default async function layout({
             <MobileSideBar userApiLimitCount={apiLimitCount} />
           </div>
           <div className="flex items-center space-x-3">
-            <ThemeButton />
+            <ThemeToggle />
             <UserButton afterSignOutUrl="/" />
           </div>
         </nav>
