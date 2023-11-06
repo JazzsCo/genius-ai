@@ -1,5 +1,6 @@
 "use client";
 
+import { FC } from "react";
 import { useTheme } from "next-themes";
 import { LucideIcon } from "lucide-react";
 
@@ -14,14 +15,14 @@ interface HeadingProps {
   darkbgcolor?: string;
 }
 
-const Heading = ({
+const Heading: FC<HeadingProps> = ({
   title,
   description,
   icon: Icon,
   color,
   bgcolor,
   darkbgcolor,
-}: HeadingProps) => {
+}) => {
   const theme = useTheme().theme;
 
   return (

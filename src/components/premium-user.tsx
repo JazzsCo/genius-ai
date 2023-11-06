@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { FC } from "react";
 import { Zap } from "lucide-react";
 
 import { MAX_FREE_COUNTS } from "@/constant";
@@ -12,7 +13,7 @@ interface PremiumUserProps {
   userApiLimitCount: number;
 }
 
-const PremiumUser = ({ userApiLimitCount }: PremiumUserProps) => {
+const PremiumUser: FC<PremiumUserProps> = ({ userApiLimitCount }) => {
   const proModal = useProModal();
 
   return (

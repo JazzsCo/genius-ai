@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { FC } from "react";
 import { Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,15 @@ import { useProModal } from "@/hooks/use-pro-modal";
 
 interface PremiumSettingProps {
   isPro: boolean;
+  loading?: boolean;
+  onSubscribe?: () => Promise<void>;
 }
 
-const PremiumSetting: React.FC<PremiumSettingProps> = ({ isPro }) => {
+const PremiumSetting: FC<PremiumSettingProps> = ({
+  isPro,
+  loading,
+  onSubscribe,
+}) => {
   const proModal = useProModal();
 
   return (
@@ -19,7 +25,13 @@ const PremiumSetting: React.FC<PremiumSettingProps> = ({ isPro }) => {
         {isPro ? "You are currently pro plan." : "You are currently free plan"}
       </h3>
       {isPro ? (
-        <Button className="rounded-xl px-7">Manage</Button>
+        <Button
+          disabled={loading}
+          onClick={onSubscribe}
+          className="rounded-xl px-7"
+        >
+          Manage
+        </Button>
       ) : (
         <Button
           onClick={proModal.onOpen}

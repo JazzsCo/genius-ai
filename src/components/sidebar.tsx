@@ -1,5 +1,6 @@
 "use client";
 
+import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -15,7 +16,7 @@ interface SideBarProps {
   userApiLimitCount: number;
 }
 
-const SideBar = ({ userApiLimitCount }: SideBarProps) => {
+const SideBar: FC<SideBarProps> = ({ userApiLimitCount }) => {
   const pathname = usePathname();
 
   return (

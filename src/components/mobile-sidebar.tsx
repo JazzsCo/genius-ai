@@ -1,5 +1,6 @@
 "use client";
 
+import { FC } from "react";
 import { MenuIcon } from "lucide-react";
 
 import SideBar from "@/components/sidebar";
@@ -10,7 +11,7 @@ interface MobileSideBarProps {
   userApiLimitCount: number;
 }
 
-const MobileSideBar = ({ userApiLimitCount }: MobileSideBarProps) => {
+const MobileSideBar: FC<MobileSideBarProps> = ({ userApiLimitCount }) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
