@@ -1,15 +1,16 @@
 import OpenAI from "openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { ChatCompletionMessage } from "openai/resources/index.mjs";
+import { ChatCompletionSystemMessageParam } from "openai/resources/index.mjs";
 
 import { checkUserApiLimit, increaseUserApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // defaults to process.env["OPENAI_API_KEY"]
 });
 
-const instructionMessage: ChatCompletionMessage = {
+const instructionMessage: ChatCompletionSystemMessageParam = {
   role: "system",
   content: "You are code generator.",
 };
@@ -36,8 +37,9 @@ export async function POST(req: Request) {
     }
 
     const freeTrial = await checkUserApiLimit();
+    const isPro = await checkSubscription();
 
-    if (!freeTrial) {
+    if (!freeTrial && !isPro) {
       return new NextResponse("Freetrial is expired.", { status: 403 });
     }
 
@@ -46,7 +48,9 @@ export async function POST(req: Request) {
       messages: [instructionMessage, message],
     });
 
-    await increaseUserApiLimit();
+    if (!isPro) {
+      await increaseUserApiLimit();
+    }
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
