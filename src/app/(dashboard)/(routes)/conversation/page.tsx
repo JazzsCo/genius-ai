@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { MessageSquare } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChatCompletionMessage } from "openai/resources/index.mjs";
+import { ChatCompletionRole } from "openai/resources/index.mjs";
 
 import Empty from "@/components/empty";
 import Heading from "@/components/heading";
@@ -25,6 +25,11 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useProModal } from "@/hooks/use-pro-modal";
+
+interface ChatCompletionMessage {
+  content: string | null;
+  role: ChatCompletionRole;
+}
 
 const formSchema = z.object({
   prompt: z.string().min(1),
