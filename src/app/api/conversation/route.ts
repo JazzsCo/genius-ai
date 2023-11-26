@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -42,11 +43,19 @@ export async function POST(req: Request) {
       messages: [message],
     });
 
+    const conversation = await prisma.conversation.create({
+      data: {
+        userId,
+        question: message?.content,
+        answer: response.choices[0].message.content!,
+      },
+    });
+
     if (!isPro) {
       await increaseUserApiLimit();
     }
 
-    return NextResponse.json(response.choices[0].message);
+    return NextResponse.json(conversation);
   } catch (error) {
     console.log("[CONVERSATION_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
