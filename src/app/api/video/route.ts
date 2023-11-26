@@ -1,4 +1,5 @@
 import Replicate from "replicate";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { checkUserApiLimit, increaseUserApiLimit } from "@/lib/api-limit";
@@ -45,11 +46,20 @@ export async function POST(req: Request) {
       }
     );
 
+    const video = await prisma.video.create({
+      data: {
+        userId,
+        question: prompt,
+        // @ts-ignore
+        videoUrl: response[0],
+      },
+    });
+
     if (!isPro) {
       await increaseUserApiLimit();
     }
 
-    return NextResponse.json(response);
+    return NextResponse.json(video);
   } catch (error) {
     console.log("[MUSIC_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
