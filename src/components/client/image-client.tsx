@@ -184,10 +184,7 @@ export default function ImageClient({ items }: ImageClientProps) {
         <div className="flex flex-col-reverse gap-y-3 mt-3">
           {items.map((item) => (
             <div key={item.id} className="flex flex-col-reverse gap-y-3">
-              <div
-                key={item.id}
-                className="p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl"
-              >
+              <div className="p-5 py-3 flex justify-start items-start gap-x-2 border rounded-xl">
                 <UserAvatar />
                 <p className="text-[15px] mt-1.5 leading-6">{item.question}</p>
               </div>

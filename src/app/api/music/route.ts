@@ -1,4 +1,5 @@
 import Replicate from "replicate";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -46,11 +47,20 @@ export async function POST(req: Request) {
       }
     );
 
+    const music = await prisma.music.create({
+      data: {
+        userId,
+        question: prompt,
+        // @ts-ignore
+        audioUrl: response.audio,
+      },
+    });
+
     if (!isPro) {
       await increaseUserApiLimit();
     }
 
-    return NextResponse.json(response);
+    return NextResponse.json(music);
   } catch (error) {
     console.log("[MUSIC_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
