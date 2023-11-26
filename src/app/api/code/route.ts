@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { ChatCompletionSystemMessageParam } from "openai/resources/index.mjs";
@@ -48,11 +49,19 @@ export async function POST(req: Request) {
       messages: [instructionMessage, message],
     });
 
+    const code = await prisma.code.create({
+      data: {
+        userId,
+        question: message?.content,
+        answer: response.choices[0].message.content!,
+      },
+    });
+
     if (!isPro) {
       await increaseUserApiLimit();
     }
 
-    return NextResponse.json(response.choices[0].message);
+    return NextResponse.json(code);
   } catch (error) {
     console.log("[CODE_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
