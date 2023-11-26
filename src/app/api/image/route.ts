@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import prisma from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -51,11 +52,19 @@ export async function POST(req: Request) {
       size: resolution,
     });
 
+    const image = await prisma.image.create({
+      data: {
+        userId,
+        question: prompt,
+        imageUrl: [...response.data.map((item) => item.url!)],
+      },
+    });
+
     if (!isPro) {
       await increaseUserApiLimit();
     }
 
-    return NextResponse.json(response.data);
+    return NextResponse.json(image);
   } catch (error) {
     console.log("[IMAGE_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
