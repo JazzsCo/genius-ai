@@ -2,15 +2,12 @@
 
 import { FC } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Montserrat } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { routes } from "@/constant";
+import Logo from "@/components/logo";
 import PremiumUser from "@/components/premium-user";
-
-const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 
 interface SideBarProps {
   userApiLimitCount: number;
@@ -22,19 +19,7 @@ const SideBar: FC<SideBarProps> = ({ userApiLimitCount, onChange }) => {
 
   return (
     <div className="flex flex-col w-full h-full px-5 lg:px-8 py-6">
-      <Link href={"/"} className="flex w-fit space-x-2 mb-8">
-        <div className="relative h-7 w-7">
-          <Image fill alt="Logp" src={"/favicon-dev.png"} />
-        </div>
-        <h2
-          className={cn(
-            "flex items-center text-lg font-medium",
-            poppins.className
-          )}
-        >
-          Genius AI
-        </h2>
-      </Link>
+      <Logo />
 
       <div className="space-y-2 flex-1">
         {routes.map((route) => (

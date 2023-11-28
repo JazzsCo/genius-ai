@@ -35,7 +35,9 @@ const Heading: FC<HeadingProps> = ({
         <Icon className={cn("w-5 h-5 sm:w-7 sm:h-7", color)} />
       </div>
       <div>
-        <h1 className="font-bold text-sm md:text-base lg:text-xl">{title}</h1>
+        <h1 className="font-bold text-sm sm:text-lg lg:text-2xl -tracking-tighter">
+          {title}
+        </h1>
         <p className="text-xs sm:text-sm text-muted-foreground">
           {description}
         </p>
