@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { MenuIcon } from "lucide-react";
 
 import SideBar from "@/components/sidebar";
@@ -12,9 +12,20 @@ interface MobileSideBarProps {
 }
 
 const MobileSideBar: FC<MobileSideBarProps> = ({ userApiLimitCount }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger onClick={() => setIsOpen(true)}>
         <Button
           variant="outline"
           size="icon"
@@ -24,7 +35,10 @@ const MobileSideBar: FC<MobileSideBarProps> = ({ userApiLimitCount }) => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <SideBar userApiLimitCount={userApiLimitCount} />
+        <SideBar
+          userApiLimitCount={userApiLimitCount}
+          onChange={() => setIsOpen(false)}
+        />
       </SheetContent>
     </Sheet>
   );

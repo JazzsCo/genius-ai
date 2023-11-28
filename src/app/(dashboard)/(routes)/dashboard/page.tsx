@@ -24,7 +24,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <>
+    <div>
       <div className="mb-8 space-y-4">
         <h2 className="text-2xl md:text-4xl font-bold text-center">
           Explore the power of AI
@@ -34,7 +34,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <div className="px-5 md:px-20 lg:px-32 xl:px-52 space-y-4">
+      <div className="px-5 md:px-20 space-y-4">
         {routes
           .filter((route) => route.name !== "Setting")
           .map((route) => (
@@ -61,6 +61,6 @@ export default function DashboardPage() {
             </Card>
           ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -19,7 +19,7 @@ export default async function layout({
         <SideBar userApiLimitCount={apiLimitCount} />
       </div>
 
-      <div className="w-full md:pl-64 lg:pl-72">
+      <div className="w-full lg:max-w-7xl mx-auto md:pl-64 lg:pl-72">
         <nav className="flex items-center justify-between md:justify-end px-5 pt-3">
           <div className="flex md:hidden">
             <MobileSideBar userApiLimitCount={apiLimitCount} />

@@ -14,9 +14,10 @@ const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 
 interface SideBarProps {
   userApiLimitCount: number;
+  onChange?: () => void;
 }
 
-const SideBar: FC<SideBarProps> = ({ userApiLimitCount }) => {
+const SideBar: FC<SideBarProps> = ({ userApiLimitCount, onChange }) => {
   const pathname = usePathname();
 
   return (
@@ -40,6 +41,7 @@ const SideBar: FC<SideBarProps> = ({ userApiLimitCount }) => {
           <Link
             key={route.href}
             href={route.href}
+            onClick={onChange}
             className={cn(
               "p-3 px-5 lg:px-7 flex space-x-4 lg:space-x-5 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 group",
               pathname === route.href ? "bg-slate-200 dark:bg-slate-700" : ""
