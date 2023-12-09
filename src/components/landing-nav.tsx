@@ -16,7 +16,7 @@ const LandingNav = () => {
         <Logo />
       </div>
 
-      <div className="flex justify-end">
+      <div className="hidden sm:flex justify-end transition-all">
         <div className="flex items-center space-x-2">
           <ThemeToggle />
 
@@ -24,7 +24,7 @@ const LandingNav = () => {
             <Link href="/dashboard">
               <Button
                 variant="preminum"
-                className="rounded-xl w-full text-white font-semibold"
+                className="rounded-xl w-full text-white font-semibold ease-linear delay-100"
               >
                 Go To Dashboard
               </Button>
@@ -36,6 +36,12 @@ const LandingNav = () => {
               </Button>
             </Link>
           )}
+        </div>
+      </div>
+
+      <div className="flex justify-end sm:hidden transition-all ease-in-out delay-75">
+        <div className="flex items-center space-x-2">
+          <ThemeToggle />
         </div>
       </div>
     </div>
