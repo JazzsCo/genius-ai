@@ -11,6 +11,37 @@ import { Button } from "@/components/ui/button";
 import CutieBotAI from "@/assets/Animation - 1702109609276.json";
 import AiBuilder from "@/assets/Animation - 1702109673704.json";
 
+const testimonials = [
+  {
+    name: "John D. - Tech Enthusiast",
+    job: "Software Developer",
+    quote:
+      "Impressed with the cutting-edge technology of this AI project! It seamlessly integrates into our workflow, saving us time and resources. The accuracy and speed at which it processes data is truly remarkable. A game-changer for any tech-savvy organization!",
+    imageUrl: "https://example.com/john_d_image.jpg",
+  },
+  {
+    name: "Sarah M. - Business Owner",
+    job: "Entrepreneur",
+    quote:
+      "This AI solution has transformed the way we operate our business. The insights provided have been invaluable, enabling us to make data-driven decisions with confidence. It's user-friendly, adaptable, and has significantly enhanced our overall efficiency. A must-have for any forward-thinking entrepreneur.",
+    imageUrl: "https://example.com/sarah_m_image.jpg",
+  },
+  {
+    name: "David R. - Data Analyst",
+    job: "Data Analyst",
+    quote:
+      "As a data analyst, I rely on precision and reliability. This AI project exceeded my expectations. Its advanced analytics capabilities have simplified complex data sets, making my job more efficient. The customization options allow me to tailor it to our specific needs, making it an essential tool in my analytical toolkit.",
+    imageUrl: "https://example.com/david_r_image.jpg",
+  },
+  {
+    name: "Emily H. - Project Manager",
+    job: "Project Manager",
+    quote:
+      "Implementing this AI project has streamlined our project management processes. The intelligent automation features have reduced manual tasks, allowing our team to focus on strategic initiatives. The real-time insights provided have improved our decision-making, resulting in more successful project outcomes. A true asset for project managers seeking efficiency and effectiveness.",
+    imageUrl: "https://example.com/emily_h_image.jpg",
+  },
+];
+
 export default function Home() {
   const { isSignedIn } = useAuth();
 
@@ -27,14 +58,15 @@ export default function Home() {
   return (
     <main className="mt-16 flex flex-col justify-center items-center">
       <div>
-        <h2 className="text-2xl sm:text-5xl font-bold text-center">
+        <h2 className="relative text-2xl sm:text-5xl font-bold text-center text-transparent gradient-text animate-gradient">
           Explore the power of AI
         </h2>
+
         <p className="text-muted-foreground font-light mt-3 md:text-xl text-center">
           Chat with the smartest AI - Experience the power of AI
         </p>
       </div>
-      <div className="mt-3 relative group">
+      <div className="mt-10 relative group">
         <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
           <div className="absolute -inset-0.5 opacity-70 group-hover:opacity-100 bg-gradient-to-r from-red-500 to-violet-500 rounded-xl blur-xl transition duration-700 group-hover:duration-200" />
           <Button
@@ -47,18 +79,24 @@ export default function Home() {
           </Button>
         </Link>
       </div>
-      <section className="mt-24 flex flex-col items-center justify-around md:flex-row space-y-10 md:space-x-10 transition-all ease-in-out">
+
+      <section className="mt-10 flex flex-col items-center justify-around md:flex-row space-y-10 md:space-x-10 transition-all ease-in-out">
         <div className="space-y-5 w-2/4 flel flex-col justify-center">
           <div className="space-y-5 text-center md:text-left transition-all">
             <h2 className="text-3xl font-bold">
-              Welcome to Genius AI - Whe &rarr;re Innovation Meets Intelligence!
+              Welcome to &nbsp;
+              <span className="text-transparent gradient-genius animate-gradient">
+                Genius AI
+              </span>
+              &nbsp;- Where Innovation Meets Intelligence!
             </h2>
+
             <p className="text-muted-foreground">
               Join the Genius AI community and embark on a journey of AI
-              innovation. Whether you&rsquo;re a seasoned developer or just
-              getting started, our platform provides the tools and support you
-              need to bring your ideas to life. Start building intelligent
-              applications that shape the future.
+              innovation. Whether you are a seasoned developer or just getting
+              started, our platform provides the tools and support you need to
+              bring your ideas to life. Start building intelligent applications
+              that shape the future.
             </p>
           </div>
         </div>
