@@ -21,14 +21,17 @@ const LandingNav = () => {
           <ThemeToggle />
 
           {isSignedIn ? (
-            <Link href="/dashboard">
-              <Button
-                variant="preminum"
-                className="rounded-xl w-full text-white font-semibold ease-linear delay-100"
-              >
-                Go To Dashboard
-              </Button>
-            </Link>
+            <div className="relative group">
+              <Link href="/dashboard">
+                <div className="absolute -inset-0.5 opacity-70 group-hover:opacity-100 bg-gradient-to-r from-red-500 to-violet-500 rounded-xl blur-xl transition duration-700 group-hover:duration-200" />
+                <Button
+                  variant="preminum"
+                  className="relative rounded-xl w-full text-white font-semibold ease-linear delay-100"
+                >
+                  Go To Dashboard
+                </Button>
+              </Link>
+            </div>
           ) : (
             <Link href={"/sign-in"}>
               <Button className="rounded-xl font-semibold" size={"lg"}>

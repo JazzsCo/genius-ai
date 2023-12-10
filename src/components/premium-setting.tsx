@@ -33,14 +33,17 @@ const PremiumSetting: FC<PremiumSettingProps> = ({
           Manage
         </Button>
       ) : (
-        <Button
-          onClick={proModal.onOpen}
-          variant="preminum"
-          className="rounded-xl px-7 text-white"
-        >
-          Upgrade
-          <Zap className="w-4 h-4 ml-2 fill-white" />
-        </Button>
+        <div className="relative group">
+          <div className="absolute -inset-0.5 opacity-70 group-hover:opacity-100 bg-gradient-to-r from-red-500 to-violet-500 rounded-xl blur-xl transition duration-700 group-hover:duration-200" />
+          <Button
+            onClick={proModal.onOpen}
+            variant="preminum"
+            className="relative rounded-xl px-7 text-white w-[180px]"
+          >
+            Upgrade
+            <Zap className="w-4 h-4 ml-2 fill-white" />
+          </Button>
+        </div>
       )}
     </>
   );

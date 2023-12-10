@@ -28,13 +28,16 @@ const PremiumUser: FC<PremiumUserProps> = ({ userApiLimitCount }) => {
           className="h-3 bg-white dark:bg-secondary"
         />
       </div>
-      <Button
-        onClick={proModal.onOpen}
-        variant="preminum"
-        className="rounded-xl w-full text-white font-semibold"
-      >
-        Upgrade <Zap className="w-4 h-4 ml-2 fill-white" />
-      </Button>
+      <div className="relative group">
+        <div className="absolute inset-1 opacity-70 group-hover:opacity-100 bg-gradient-to-r from-red-500 to-violet-500 rounded-xl blur-lg transition duration-700 group-hover:duration-200" />
+        <Button
+          onClick={proModal.onOpen}
+          variant="preminum"
+          className="relative rounded-xl w-full text-white font-semibold"
+        >
+          Upgrade <Zap className="w-4 h-4 ml-2 fill-white" />
+        </Button>
+      </div>
     </div>
   );
 };

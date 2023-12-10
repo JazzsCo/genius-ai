@@ -34,12 +34,13 @@ export default function Home() {
           Chat with the smartest AI - Experience the power of AI
         </p>
       </div>
-      <div className="mt-3">
+      <div className="mt-3 relative group">
         <Link href={isSignedIn ? "/dashboard" : "/sign-in"}>
+          <div className="absolute -inset-0.5 opacity-70 group-hover:opacity-100 bg-gradient-to-r from-red-500 to-violet-500 rounded-xl blur-xl transition duration-700 group-hover:duration-200" />
           <Button
             variant="preminum"
             size="lg"
-            className="rounded-xl text-white font-semibold"
+            className="relative rounded-xl text-white font-semibold"
           >
             Use This AI For Free
             <ArrowRight className="w-4 h-4 ml-2" />
@@ -50,7 +51,7 @@ export default function Home() {
         <div className="space-y-5 w-2/4 flel flex-col justify-center">
           <div className="space-y-5 text-center md:text-left transition-all">
             <h2 className="text-3xl font-bold">
-              Welcome to Genius AI - Where Innovation Meets Intelligence!
+              Welcome to Genius AI - Whe &rarr;re Innovation Meets Intelligence!
             </h2>
             <p className="text-muted-foreground">
               Join the Genius AI community and embark on a journey of AI
