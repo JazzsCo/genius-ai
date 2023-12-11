@@ -10,35 +10,35 @@ import { Button } from "@/components/ui/button";
 
 import CutieBotAI from "@/assets/Animation - 1702109609276.json";
 import AiBuilder from "@/assets/Animation - 1702109673704.json";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const testimonials = [
   {
-    name: "John D. - Tech Enthusiast",
+    name: "John D",
     job: "Software Developer",
-    quote:
-      "Impressed with the cutting-edge technology of this AI project! It seamlessly integrates into our workflow, saving us time and resources. The accuracy and speed at which it processes data is truly remarkable. A game-changer for any tech-savvy organization!",
-    imageUrl: "https://example.com/john_d_image.jpg",
+    quote: "This AI solution has transformed the way we operate our business.",
   },
   {
-    name: "Sarah M. - Business Owner",
+    name: "Sarah M",
     job: "Entrepreneur",
-    quote:
-      "This AI solution has transformed the way we operate our business. The insights provided have been invaluable, enabling us to make data-driven decisions with confidence. It's user-friendly, adaptable, and has significantly enhanced our overall efficiency. A must-have for any forward-thinking entrepreneur.",
-    imageUrl: "https://example.com/sarah_m_image.jpg",
+    quote: "This AI solution has transformed the way we operate our business.",
   },
   {
-    name: "David R. - Data Analyst",
+    name: "David R",
     job: "Data Analyst",
-    quote:
-      "As a data analyst, I rely on precision and reliability. This AI project exceeded my expectations. Its advanced analytics capabilities have simplified complex data sets, making my job more efficient. The customization options allow me to tailor it to our specific needs, making it an essential tool in my analytical toolkit.",
-    imageUrl: "https://example.com/david_r_image.jpg",
+    quote: "This AI solution has transformed the way we operate our business.",
   },
   {
-    name: "Emily H. - Project Manager",
+    name: "Emily H",
     job: "Project Manager",
-    quote:
-      "Implementing this AI project has streamlined our project management processes. The intelligent automation features have reduced manual tasks, allowing our team to focus on strategic initiatives. The real-time insights provided have improved our decision-making, resulting in more successful project outcomes. A true asset for project managers seeking efficiency and effectiveness.",
-    imageUrl: "https://example.com/emily_h_image.jpg",
+    quote: "This AI solution has transformed the way we operate our business.",
   },
 ];
 
@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <main className="mt-16 flex flex-col justify-center items-center">
       <div>
-        <h2 className="relative text-2xl sm:text-5xl font-bold text-center text-transparent gradient-text animate-gradient">
+        <h2 className="relative text-2xl sm:text-5xl font-bold text-center  repeat-1 text-transparent gradient-text animate-gradient">
           Explore the power of AI
         </h2>
 
@@ -105,6 +105,32 @@ export default function Home() {
           <Lottie animationData={AiBuilder} />
         </div>
       </section>
+
+      <div className="mt-16 flex flex-col md:flex-row items-center gap-7">
+        {testimonials.map((item, i) => (
+          <div key={i}>
+            <Card className="rounded-xl bg-muted shadow-lg w-[300px]">
+              <CardHeader>
+                <CardTitle className="text-xl flex gap-2">
+                  {item.name}
+
+                  <Avatar className="w-6 h-6">
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="@shadcn"
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </CardTitle>
+                <CardDescription>{item.job}</CardDescription>
+              </CardHeader>
+              <CardContent className="-mt-3 leading-tight">
+                {item.quote}
+              </CardContent>
+            </Card>
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
