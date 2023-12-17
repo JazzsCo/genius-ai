@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <main className="mt-16 flex flex-col justify-center items-center">
       <div>
-        <h2 className="relative text-2xl sm:text-5xl font-bold text-center  repeat-1 text-transparent gradient-text animate-gradient">
+        <h2 className="relative text-2xl sm:text-5xl font-bold text-center repeat-1 text-transparent gradient-text animate-gradient">
           Explore the power of AI
         </h2>
 
