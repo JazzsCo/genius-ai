@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-import CutieBotAI from "@/assets/Animation - 1702109609276.json";
+// import CutieBotAI from "@/assets/Animation - 1702109609276.json";
 import AiBuilder from "@/assets/Animation - 1702109673704.json";
 import {
   Card,
