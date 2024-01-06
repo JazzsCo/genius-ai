@@ -22,6 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <LandingNav />
         <div>{children}</div>
       </div>
+
       <Footer />
     </main>
   );

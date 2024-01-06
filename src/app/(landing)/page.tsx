@@ -106,7 +106,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="mt-16 flex flex-col md:flex-row items-center gap-7">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 items-center gap-7">
         {testimonials.map((item, i) => (
           <div key={i}>
             <Card className="rounded-xl bg-muted shadow-lg w-[300px]">

@@ -1,12 +1,24 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import Wave from "react-wavify";
 
 const Footer = () => {
   const theme = useTheme().theme;
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
-    <section className="mt-20 relative">
+    <section className="mt-40 relative">
       <Wave
         mask="url(#mask)"
         fill={theme === "dark" ? "#0F172A" : "#F1F5F9"}
